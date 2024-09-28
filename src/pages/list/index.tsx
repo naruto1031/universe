@@ -116,7 +116,7 @@ const DescriptionSection: React.FC<{ imageSrc: string | StaticImageData; descrip
                     onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
                     onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
                 >
-                    更多信息
+                    詳細
                 </button>
             </div>
         </div>

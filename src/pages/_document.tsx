@@ -5,7 +5,11 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body
+        style={{
+          margin: "0"
+        }}
+      >
         <Header />
         <Main />
         <NextScript />

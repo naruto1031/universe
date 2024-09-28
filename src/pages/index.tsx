@@ -7,7 +7,7 @@ interface Message {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'system', content: 'あなたは有能なアシスタントです。' },
+    { role: 'system', content: '私は宇宙のすべての知識を持つAIアシスタントです。受けた質問に対して、!や絵文字を用いながら、小学生でもわかるようポップに説明して下さい' },
   ]);
   const [input, setInput] = useState('');
 
@@ -35,19 +35,27 @@ export default function Home() {
   };
 
   return (
-    <>
-      <div style={{ padding: '20px', maxHeight: '80vh', overflowY: 'auto', backgroundColor: '#f0f0f0' }}>
+    <div style={{ position: 'relative', height: 'calc(100vh - 70px)', backgroundColor: '#000' }}>
+      <div style={{ padding: '20px', maxHeight: 'calc(100vh - 100px)', overflowY: 'auto' }}>
+        <div style={{ color: '#fff', fontSize: '24px', marginBottom: '20px', textAlign: 'center' }}>🌌 宇宙何でも相談チャット</div>
         {messages
           .filter((msg) => msg.role !== 'system')
           .map((msg, index) => (
-            <div key={index} style={{ display: 'flex', justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start', marginBottom: '10px' }}>
+            <div
+              key={index}
+              style={{
+                display: 'flex',
+                justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+                marginBottom: '10px',
+              }}
+            >
               <div
                 style={{
                   maxWidth: '60%',
-                  padding: '10px',
-                  borderRadius: '20px',
-                  backgroundColor: msg.role === 'user' ? '#dcf8c6' : '#ffffff',
-                  border: '1px solid #e0e0e0',
+                  padding: '15px',
+                  borderRadius: '15px',
+                  backgroundColor: msg.role === 'user' ? '#1e3a8a' : '#4b5563',
+                  color: '#fff',
                   wordBreak: 'break-word',
                 }}
               >
@@ -56,36 +64,50 @@ export default function Home() {
             </div>
           ))}
       </div>
-      <form onSubmit={sendMessage} style={{ display: 'flex', padding: '10px', backgroundColor: '#f0f0f0' }}>
+      <form
+        onSubmit={sendMessage}
+        style={{
+          position: 'absolute',
+          bottom: '0',
+          width: '100%',
+          display: 'flex',
+          padding: '10px',
+          backgroundColor: '#000',
+          boxSizing: 'border-box',
+        }}
+      >
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="メッセージを入力..."
+          placeholder="宇宙の謎を問いかけてください..."
           style={{
             flexGrow: 1,
-            padding: '10px',
-            borderRadius: '20px',
-            border: '1px solid #ccc',
+            padding: '15px',
+            borderRadius: '30px',
+            border: '1px solid #333',
             outline: 'none',
+            fontSize: '16px',
+            backgroundColor: '#1f2937',
+            color: '#fff',
           }}
         />
         <button
           type="submit"
           style={{
             marginLeft: '10px',
-            padding: '0 15px',
-            borderRadius: '50%',
+            padding: '0 20px',
+            borderRadius: '30px',
             border: 'none',
-            backgroundColor: '#07c160',
+            backgroundColor: '#2563eb',
             color: '#fff',
-            fontSize: '16px',
+            fontSize: '20px',
             cursor: 'pointer',
           }}
         >
-          送信
+          🚀
         </button>
       </form>
-    </>
+    </div>
   );
 }
