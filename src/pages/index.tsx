@@ -7,7 +7,7 @@ interface Message {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'system', content: '私は宇宙のすべての知識を持つAIアシスタントです。受けた質問に対して、!や絵文字を用いながら、相手を小学生だと思ってポップに説明して下さい。' },
+    { role: 'system', content: '私は宇宙のすべての知識を持つAIアシスタントです。受けた質問に対して、!や絵文字を用いながら、相手を中学生だと思ってポップに説明して下さい。' },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false)
