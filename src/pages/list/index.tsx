@@ -9,7 +9,6 @@ import uranusImg from './uranus.png';
 import neptuneImg from './neptune.png';
 import plutoImg from './pluto.png';
 
-// 如果使用 Next.js，导入 StaticImageData
 import type { StaticImageData } from 'next/image';
 
 const planetSections = [
@@ -60,61 +59,65 @@ const planetSections = [
     },
 ];
 
-// 更新组件属性类型
 const DescriptionSection: React.FC<{ imageSrc: string | StaticImageData; description: string; isImageOnLeft: boolean }> = ({ imageSrc, description, isImageOnLeft }) => {
     return (
         <div style={{ 
             display: 'flex', 
             flexDirection: isImageOnLeft ? 'row' : 'row-reverse', 
-            alignItems: 'flex-start', 
+            alignItems: 'center', 
             marginBottom: '40px', 
             opacity: 0, 
             animation: 'fadeIn 0.5s forwards',
-            animationDelay: '0.3s' 
+            animationDelay: '0.3s',
+            flexWrap: 'wrap'
         }}>
             <img 
                 src={typeof imageSrc === 'string' ? imageSrc : imageSrc.src} 
                 alt="惑星" 
                 style={{ 
-                    width: '300px', 
-                    height: '200px', 
+                    width: '100%', 
+                    maxWidth: '300px', 
+                    height: 'auto', 
                     margin: '0 20px', 
                     border: '2px solid #ccc', 
                     borderRadius: '10px', 
                     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', 
                     transition: 'transform 0.3s',
-                    animation: 'move 5s linear infinite', // 添加移动效果
+                    animation: 'move 5s linear infinite',
+                    cursor: 'pointer'
                 }} 
                 onMouseOver={(e) => {
                     e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.animation = 'shake 0.2s forwards'; // 添加抖动效果
+                    e.currentTarget.style.animation = 'shake 0.2s forwards';
                 }}
                 onMouseOut={(e) => {
                     e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.animation = 'none'; // 移除抖动效果
+                    e.currentTarget.style.animation = 'none';
                 }}
             />
             <div style={{ 
-                maxWidth: '70%', 
+                maxWidth: '100%', 
+                flex: 1,
                 padding: '10px', 
                 backgroundColor: '#fff', 
                 borderRadius: '8px', 
-                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)' 
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', 
+                margin: '10px 0' 
             }}>
                 <p style={{ lineHeight: '1.6', color: '#333' }}>{description}</p>
                 <button 
                     style={{ 
                         marginTop: '10px', 
                         padding: '10px 15px', 
-                        backgroundColor: '#007BFF', 
+                        backgroundColor: '#28a745', 
                         color: '#fff', 
                         border: 'none', 
                         borderRadius: '5px', 
                         cursor: 'pointer', 
                         transition: 'background-color 0.3s' 
                     }}
-                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#0056b3'}
-                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#007BFF'}
+                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#218838'}
+                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#28a745'}
                 >
                     詳細
                 </button>
@@ -150,8 +153,8 @@ const SolarSystemPage: React.FC = () => {
                     }
                 `}
             </style>
-            <div style={{ padding: '20px', fontFamily: 'Roboto, sans-serif', background: 'linear-gradient(to bottom, #e0eafc, #cfdef3)' }}>
-                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', color: '#222', marginBottom: '20px', textShadow: '2px 2px 5px rgba(0, 0, 0, 0.3)' }}>
+            <div style={{ padding: '20px', fontFamily: 'Roboto, sans-serif', background: '#f4f6f9' }}>
+                <h1 style={{ textAlign: 'center', fontSize: '2.5rem', color: '#007bff', marginBottom: '20px', textShadow: '2px 2px 5px rgba(0, 0, 0, 0.1)' }}>
                     太陽系の九大惑星
                 </h1>
                 {planetSections.map((section, index) => (

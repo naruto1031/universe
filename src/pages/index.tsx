@@ -7,9 +7,10 @@ interface Message {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'system', content: '私は宇宙のすべての知識を持つAIアシスタントです。受けた質問に対して、!や絵文字を用いながら、小学生でもわかるようポップに説明して下さい' },
+    { role: 'system', content: '私は宇宙のすべての知識を持つAIアシスタントです。受けた質問に対して、!や絵文字を用いながら、相手を小学生だと思ってポップに説明して下さい。' },
   ]);
   const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false)
 
   const sendMessage = async (e: FormEvent) => {
     e.preventDefault();
@@ -21,6 +22,7 @@ export default function Home() {
     setInput('');
 
     try {
+      setIsLoading(true)
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -29,15 +31,18 @@ export default function Home() {
 
       const data = await response.json();
       setMessages([...newMessages, { role: 'assistant', content: data.message }]);
+
     } catch (error) {
       console.error('エラーが発生しました:', error);
     }
+
+    setIsLoading(false)
   };
 
   return (
     <div style={{ position: 'relative', height: 'calc(100vh - 70px)', backgroundColor: '#000' }}>
       <div style={{ padding: '20px', maxHeight: 'calc(100vh - 100px)', overflowY: 'auto' }}>
-        <div style={{ color: '#fff', fontSize: '24px', marginBottom: '20px', textAlign: 'center' }}>🌌 宇宙何でも相談チャット</div>
+        <div style={{ color: '#fff', fontSize: "2.0rem", marginBottom: '20px', textAlign: 'center' }}>🌌 宇宙何でも相談チャット</div>
         {messages
           .filter((msg) => msg.role !== 'system')
           .map((msg, index) => (
@@ -68,7 +73,7 @@ export default function Home() {
         onSubmit={sendMessage}
         style={{
           position: 'absolute',
-          bottom: '0',
+          bottom: '10px',
           width: '100%',
           display: 'flex',
           padding: '10px',
@@ -102,10 +107,12 @@ export default function Home() {
             backgroundColor: '#2563eb',
             color: '#fff',
             fontSize: '20px',
-            cursor: 'pointer',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            opacity: isLoading ? 0.5 : 1,
           }}
+          disabled={isLoading}
         >
-          🚀
+          {isLoading ? '送信中...' : '🚀'}   
         </button>
       </form>
     </div>
