@@ -11,6 +11,8 @@
   "dependencies": {
     "jss": "^10.10.0",
     "next": "14.2.13",
+    "openai": "^4.65.0",
+    "openapi": "^1.0.1",
     "react": "^18",
     "react-dom": "^18"
   },
